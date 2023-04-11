@@ -1,40 +1,69 @@
-import matplotlib.pyplot as plt 
-import networkx as nx 
 
-def read_graph_from_file(filename):
+def readFileUCS(filename):
     try:
         with open('test/' + filename + '.txt', 'r') as file:
-            graph = [[int(num) for num in line.split()] for line in file]
-            if len(graph) == 0:
-                raise ValueError("File is empty!")
-            elif len(graph) != len(graph[0]):
-                raise ValueError("Graph must be square!")
-            else:
-                for i in range(len(graph)):
-                    for j in range(len(graph)):
-                        if graph[i][i] != 0:
-                            raise ValueError(f"Diagonal elements graph[{i}][{i}] must be 0!")
-                        if graph[i][j] != graph[j][i]:
-                            raise ValueError(f"Graph[{i}][{j}] must be equal to graph[{j}][{i}]!]")
-        return graph
+            nodes = file.readline().strip().split(', ')
+            graph = []
+            for line in file:
+                weights = line.split()
+                graph.append([int(num) for num in weights])
+            if len(graph) != len(nodes):
+                raise ValueError("Jumlah baris tidak sama dengan jumlah node!")
+            for i in range(len(graph)):
+                if len(graph[i]) != len(nodes):
+                    raise ValueError(f"Baris {i+2} tidak memiliki jumlah elemen yang sama dengan jumlah node!")
+                if graph[i][i] != 0:
+                    raise ValueError(f"Elemen diagonal graph[{i}][{i}] harus bernilai 0!")
+                for j in range(i+1, len(graph)):
+                    if graph[i][j] != graph[j][i]:
+                        raise ValueError(f"Graph[{i}][{j}] harus sama dengan graph[{j}][{i}]!")
+        return nodes, graph
     except FileNotFoundError:
-        print(f"File {filename}.txt not found!")
+        print(f"File {filename}.txt tidak ditemukan!")
     except ValueError as e:
         print(str(e))
+    return None, None
 
-def show_graph(graph):
-    G = nx.DiGraph() 
-    for i in range(len(graph)): 
-        for j in range(len(graph[i])): 
-            if graph[i][j] != 0: 
-               G.add_edge(i,j, weight=graph[i][j]) # menambahkan bobot pada setiap edge
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos=pos, with_labels=True, edge_color='black', node_color='#bca0dc', font_size= 10, node_size= 500)
-    labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos=pos, edge_labels=labels, font_size= 8) # menampilkan label pada setiap edge
-    # mengambil manajer gambar saat ini
-    mgr = plt.get_current_fig_manager()
+def readFileAStar(filename):
+    try:
+        with open('test/' + filename + '.txt', 'r') as file:
+            # Read the first line to get the node names
+            nodes = file.readline().strip().split(', ')
 
-    # menampilkan grafik dalam mode fullscreen
-    mgr.full_screen_toggle()
-    plt.show()
+            # Read the next lines to get the graph
+            graph = []
+            for i in range(len(nodes)):
+                line = file.readline().strip()
+                weights = list(map(int, line.split()))
+                if len(weights) != len(nodes):
+                    raise ValueError("Jumlah elemen di baris tidak sama dengan jumlah node!")
+                graph.append(list(weights))
+
+            # Read the next lines to get the coordinates
+            coordinat = []
+            for i in range(len(nodes)):
+                line = file.readline().strip()
+                coordinate = list(map(int, line.split(',')))
+                if len(coordinate) != 2:
+                    raise ValueError("Jumlah elemen di baris tidak sama dengan 2!")
+                coordinat.append(list(coordinate))
+
+            # Validate the graph
+            if len(graph) != len(nodes):
+                raise ValueError("Jumlah baris tidak sama dengan jumlah node!")
+            for i in range(len(graph)):
+                if len(graph[i]) != len(nodes):
+                    raise ValueError(f"Baris {i+2} tidak memiliki jumlah elemen yang sama dengan jumlah node!")
+                if graph[i][i] != 0:
+                    raise ValueError(f"Elemen diagonal graph[{i}][{i}] harus bernilai 0!")
+                for j in range(i+1, len(graph)):
+                    if graph[i][j] != graph[j][i]:
+                        raise ValueError(f"Graph[{i}][{j}] harus sama dengan graph[{j}][{i}]!")
+
+            # Return the nodes, graph, and coordinates
+            return nodes, graph, coordinat
+    except FileNotFoundError:
+        print(f"File {filename}.txt tidak ditemukan!")
+    except ValueError as e:
+        print(str(e))
+    return None, None, None
