@@ -1,6 +1,8 @@
 import heapq
 
-def ucs(graph, start, goal):
+def ucs(graph, start, goal, nodes):
+    start = nodes.index(start)
+    goal = nodes.index(goal)
     queue = [(0, start, [])]  # jarak, simpul, lintasan
     visited = set()
     while queue:
