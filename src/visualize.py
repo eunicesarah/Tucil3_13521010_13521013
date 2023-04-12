@@ -53,13 +53,13 @@ def showGraph(nodes, graph, path, coordinates):
     nx.draw_networkx_nodes(G, pos, node_color=nodeColors, node_size=500)
     nx.draw_networkx_edges(G, pos, edge_color=edgeColors)
     nx.draw_networkx_labels(G, pos, nodeLabels, font_size=8, font_weight='bold')
-    nx.draw_networkx_edgeLabels(G, pos, edgeLabels, font_size=8)
+    nx.draw_networkx_edge_labels(G, pos, edgeLabels, font_size=8, font_weight='bold')
     plt.show()
 
 def showMap(nodes, graph, path, coordinates):
     avgLat = sum([coordinates[i][0] for i in range(len(coordinates))]) / len(coordinates)
     avgLng = sum([coordinates[i][1] for i in range(len(coordinates))]) / len(coordinates)
-    gmap = gmplot.GoogleMapPlotter(avgLat, avgLng, apikey="AIzaSyB5UAh67qqEWkt8i2VH6AMD3KJgIdx4vNI", use_api=True, map_type="roadmap", zoom=14, title="My Map")
+    gmap = gmplot.GoogleMapPlotter(avgLat, avgLng, apikey="AIzaSyB5UAh67qqEWkt8i2VH6AMD3KJgIdx4vNI", use_api=True, map_type="roadmap", zoom=14, title="Shortest Path")
 
     # Plotting semua nodes
     for i, node in enumerate(nodes):
