@@ -19,5 +19,5 @@ Berikut adalah library yang harus terinstall:
 3. Double klik file run.bat pada folder ini
 
 ### Author
-Muhamad Salman Hakim Alfarisi
+Muhamad Salman Hakim Alfarisi 13521010
 Eunice Sarah Siregar - 13521013
