@@ -2,9 +2,8 @@ from readFile import *
 from ucs import *
 from astar import *
 from visualize import *
-# import os
 import sys
-# import time
+import time
 
 def main():
     while True:
@@ -17,12 +16,13 @@ def main():
         if choice == '1':
             while True:
                 filename = input("Please enter the filename: ")
-                # nodes, graph = readFileUCS(filename)
                 nodes, graph, coordinates = readFile(filename)
                 if nodes is None and graph is None:
                     continue
                 print("The map is: ")
                 print(nodes)
+                print(graph)
+                print(coordinates)
                 start = input("Please enter the start node: ")
                 goal = input("Please enter the goal node: ")
                 if start not in nodes or goal not in nodes:
@@ -32,7 +32,7 @@ def main():
                 printPath(path, cost)
                 show = input("Do you want to see the graph? (y/n): ")
                 if show == 'y':
-                    showGraphUCS(nodes, graph, path)
+                    showGraphUCS(nodes, graph, path, coordinates)
                     print("Thank you for using our program!")
                 break
         elif choice == '2':
@@ -56,8 +56,9 @@ def main():
                     print("Thank you for using our program!")
                 break
         elif (choice != '1' and choice != '2'):
-            print("Bye!")
-            sys.exit()
+                print("Bye!")
+                time.sleep(2)
+                sys.exit()
 
 
 if __name__ == "__main__":
