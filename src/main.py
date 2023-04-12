@@ -21,14 +21,16 @@ def main():
                     continue
                 print("The map is: ")
                 print(nodes)
-                print(graph)
-                print(coordinates)
+                # print(graph)
+                # print(coordinates)
                 start = input("Please enter the start node: ")
                 goal = input("Please enter the goal node: ")
                 if start not in nodes or goal not in nodes:
                     print("Start or goal node not found!")
                     continue
                 path, cost = ucs(graph, start, goal, nodes)
+                for i in range(len(path)):
+                    path[i] = nodes[path[i]]
                 printPath(path, cost)
                 show = input("Do you want to see the graph? (y/n): ")
                 if show == 'y':
