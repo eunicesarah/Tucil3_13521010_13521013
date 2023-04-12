@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import gmplot
 import webbrowser
+import os
 
 def printPath(path, cost):
     if path is None and cost is None:
@@ -18,7 +19,7 @@ def printPath(path, cost):
 def showGraph(nodes, graph, path, coordinates):
     print("Showing graph...")
     showMap(nodes, graph, path, coordinates)
-    webbrowser.open('map.html')
+    webbrowser.open(os.getcwd() + "\\bin\\map.html")
 
     # membuat graph
     G = nx.Graph()
@@ -78,4 +79,4 @@ def showMap(nodes, graph, path, coordinates):
                     gmap.plot([lat1, lat2], [lng1, lng2], 'blue', edge_width=5)
 
     # Menampilkan map dalam file html
-    gmap.draw("map.html")
+    gmap.draw("bin/map.html")
