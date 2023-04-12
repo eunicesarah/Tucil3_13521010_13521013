@@ -1,10 +1,7 @@
 def readFile(filename):
     try:
         with open('test/' + filename + '.txt', 'r') as file:
-            # Read the first line to get the node names
             nodes = file.readline().strip().split(', ')
-
-            # Read the next lines to get the graph
             graph = []
             for i in range(len(nodes)):
                 line = file.readline().strip()
@@ -13,7 +10,6 @@ def readFile(filename):
                     raise ValueError("Jumlah elemen di baris tidak sama dengan jumlah node!")
                 graph.append(list(weights))
 
-            # Read the next lines to get the coordinates
             coordinat = []
             for i in range(len(nodes)):
                 line = file.readline().strip()
@@ -22,7 +18,6 @@ def readFile(filename):
                     raise ValueError("Jumlah elemen di baris tidak sama dengan 2!")
                 coordinat.append(list(coordinate))
 
-            # Validate the graph
             if len(graph) != len(nodes):
                 raise ValueError("Jumlah baris tidak sama dengan jumlah node!")
             for i in range(len(graph)):
@@ -33,8 +28,6 @@ def readFile(filename):
                 for j in range(i+1, len(graph)):
                     if graph[i][j] != graph[j][i]:
                         raise ValueError(f"Graph[{i}][{j}] harus sama dengan graph[{j}][{i}]!")
-
-            # Return the nodes, graph, and coordinates
             return nodes, graph, coordinat
     except FileNotFoundError:
         print(f"File {filename}.txt tidak ditemukan!")

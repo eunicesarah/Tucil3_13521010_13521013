@@ -27,13 +27,17 @@ def main():
                     print("Start or goal node not found!")
                     continue
                 path, cost = ucs(graph, start, goal, nodes)
-                for i in range(len(path)):
-                    path[i] = nodes[path[i]]
-                printPath(path, cost)
-                show = input("Do you want to see the graph? (y/n): ")
-                if show == 'y':
-                    showGraph(nodes, graph, path, coordinates)
-                    print("Thank you for using our program!")
+                if path is None and cost is None:
+                    print("No path found!")
+                    continue
+                else:
+                    for i in range(len(path)):
+                        path[i] = nodes[path[i]]
+                    printPath(path, cost)
+                    show = input("Do you want to see the graph? (y/n): ")
+                    if show == 'y':
+                        showGraph(nodes, graph, path, coordinates)
+                        print("Thank you for using our program!")
                 break
         elif choice == '2':
             while True:
@@ -48,14 +52,18 @@ def main():
                 if start not in nodes or goal not in nodes:
                     print("Start or goal node not found!")
                     continue
-                path, cost = aStar(start, goal, nodes, graph, coordinates)
-                for i in range(len(path)):
-                    path[i] = nodes[path[i]]
-                printPath(path, cost)
-                show = input("Do you want to see the graph? (y/n): ")
-                if show == 'y':
-                    showGraph(nodes, graph, path, coordinates)
-                    print("Thank you for using our program!")
+                path, cost = aStar(graph, start, goal, nodes, coordinates)
+                if path is None and cost is None:
+                    print("No path found!")
+                    continue
+                else:
+                    for i in range(len(path)):
+                        path[i] = nodes[path[i]]
+                    printPath(path, cost)
+                    show = input("Do you want to see the graph? (y/n): ")
+                    if show == 'y':
+                        showGraph(nodes, graph, path, coordinates)
+                        print("Thank you for using our program!")
                 break
         elif (choice != '1' and choice != '2'):
                 print("Bye!")

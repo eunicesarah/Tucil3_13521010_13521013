@@ -1,19 +1,18 @@
 import heapq
 
-def ucs(graph, start, goal, nodes):
-    start = nodes.index(start)
-    goal = nodes.index(goal)
-    queue = [(0, start, [])]  # jarak, simpul, lintasan
+def ucs(graph, startString, goalString, nodes):
+    start = nodes.index(startString)
+    goal = nodes.index(goalString)
+    queue = [(0, start, [])]
     visited = set()
     while queue:
-        (cost, current_node, path) = heapq.heappop(queue)
-        if current_node == goal:
-            return path + [current_node], cost  # tambahkan biaya total ke hasil
-        if current_node not in visited:
-            visited.add(current_node)
-            for neighbor in range(len(graph[current_node])):
-                if graph[current_node][neighbor] != 0:
-                    new_cost = cost + graph[current_node][neighbor]
-                    heapq.heappush(queue, (new_cost, neighbor, path + [current_node]))
- 
-    return [], 0
+        (cost, currNode, path) = heapq.heappop(queue)
+        if currNode == goal:
+            return path + [currNode], cost
+        if currNode not in visited:
+            visited.add(currNode)
+            for neighbor in range(len(graph[currNode])):
+                if graph[currNode][neighbor] != 0:
+                    newCost = cost + graph[currNode][neighbor]
+                    heapq.heappush(queue, (newCost, neighbor, path + [currNode]))
+    return None, None
