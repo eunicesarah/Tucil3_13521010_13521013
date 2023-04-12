@@ -46,5 +46,7 @@ Tucil3_13521010_13521013
 
 
 ### Author
-Muhamad Salman Hakim Alfarisi 13521010
+```
+Muhamad Salman Hakim Alfarisi - 13521010
 Eunice Sarah Siregar - 13521013
+```
