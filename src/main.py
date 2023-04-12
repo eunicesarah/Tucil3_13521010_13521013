@@ -21,11 +21,6 @@ def main():
                     continue
                 print("The map is: ")
                 print(nodes)
-<<<<<<< HEAD
-=======
-                # print(graph)
-                # print(coordinates)
->>>>>>> 7c911f9c5faa978b0c919fee89768148096998d9
                 start = input("Please enter the start node: ")
                 goal = input("Please enter the goal node: ")
                 if start not in nodes or goal not in nodes:
