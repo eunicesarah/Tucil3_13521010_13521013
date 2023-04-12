@@ -1,4 +1,4 @@
-## Tucil2_13521010_13521013
+## Tucil3_13521010_13521013
 # Closest Path with Uniform Cost Search Algorithm and A* Algorithm
 
 ### About
